@@ -1,0 +1,10 @@
+{
+  "name": "cokelocationdetection",
+  "version": "1.0.0",
+  "description": "Coke, 5Alive, and Schweppes Location DCO Banner Creatives",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site ready'",
+    "start": "npx serve -s ."
+  }
+}
