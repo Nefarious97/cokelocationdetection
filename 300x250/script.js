@@ -128,6 +128,16 @@ function autoDetectLocation() {
                     AREA_NAME = nearest.area;
                     updateStoreUI(AREA_NAME);
                     if (gpsIndicator) gpsIndicator.className = "gps-indicator success";
+
+                    const dist = calculateDistance(lat, lng, nearest.lat, nearest.lng);
+                    if (dist > 5) {
+                        try {
+                            window.open(FALLBACK_URL, "_top");
+                        } catch (e) {
+                            window.location.href = FALLBACK_URL;
+                        }
+                        return;
+                    }
                 }
             },
             (error) => {
