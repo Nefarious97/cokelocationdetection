@@ -1,0 +1,368 @@
+/* CSS Reset and Core Setup */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    height: 250px;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    user-select: none;
+    background: #000000;
+}
+
+/* Clickable Banner Container */
+.banner-container {
+    position: relative;
+    width: 300px;
+    height: 250px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid #222222;
+    cursor: pointer;
+}
+
+/* Background Visual */
+.slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 8s ease-out;
+    z-index: 1;
+}
+
+.banner-container:hover .slide-bg {
+    transform: scale(1.02);
+    /* Interactive zoom on hover */
+}
+
+/* Text Container (Positions dynamically over the black bar) */
+.text-container {
+    position: absolute;
+    top: 180px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.tagline {
+    font-size: 10px;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.store-name-container {
+    display: inline-block;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.store-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #ff9100;
+    /* Rich orange accent */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    margin: 1px 0 0 0;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+/* Centered Location Target Icon Overlay */
+.location-icon-container {
+    position: absolute;
+    bottom: 4px;
+    right: 90px;
+    pointer-events: auto;
+    z-index: 12;
+    cursor: pointer;
+}
+
+.radar-circle-centered {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    transition: transform 0.3s ease;
+}
+
+.banner-container:hover .radar-circle-centered {
+    transform: scale(1.08);
+    /* Hover micro-interaction zoom */
+}
+
+.radar-cross {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid #000000;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.radar-cross::before,
+.radar-cross::after {
+    content: '';
+    position: absolute;
+    background: #000000;
+}
+
+/* Crosshair horizontal line */
+.radar-cross::before {
+    top: 50%;
+    left: -2px;
+    width: 12px;
+    height: 1.5px;
+    transform: translateY(-50%);
+}
+
+/* Crosshair vertical line */
+.radar-cross::after {
+    left: 50%;
+    top: -2px;
+    width: 1.5px;
+    height: 12px;
+    transform: translateX(-50%);
+}
+
+/* Breathing Ripple Pulse Animation */
+.pulse-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: radar-pulse 1.8s infinite ease-out;
+    pointer-events: none;
+}
+
+@keyframes radar-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+/* Sleek GPS Status Micro-Indicator */
+.gps-indicator {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 6px;
+    height: 6px;
+    background: #ffc107;
+    /* Yellow (Locating) */
+    border-radius: 50%;
+    z-index: 15;
+    box-shadow: 0 0 6px #ffc107;
+    transition: all 0.3s ease;
+}
+
+.gps-indicator.success {
+    background: #4caf50;
+    /* Green (Found closest store) */
+    box-shadow: 0 0 6px #4caf50;
+}
+
+.gps-indicator.error {
+    background: #f44336;
+    /* Red (Using fallback) */
+    box-shadow: 0 0 6px #f44336;
+}
+
+.gps-indicator::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 12px;
+    height: 12px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    animation: gps-pulse 1.8s infinite ease-out;
+    opacity: 0.8;
+}
+
+@keyframes gps-pulse {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+/* DT Logo Styling */
+.dt-logo {
+    position: absolute;
+    top: 0.1px;
+    right: 0.1px;
+    width: 20px;
+    height: auto;
+    z-index: 15;
+    transition: transform 0.3s ease;
+}
+
+.banner-container:hover .dt-logo {
+    transform: scale(1.05);
+}
+
+/* Screenshot-Matched closest stores overlay */
+.near-stores-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f5951d;
+    /* Vibrant orange matching the screenshot exactly */
+    z-index: 120;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.near-stores-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.near-header {
+    height: 46px;
+    background: #ab6b1d;
+    /* Warm brown-gold header background */
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.near-back-btn {
+    background: rgba(255, 255, 255, 0.18);
+    border: none;
+    color: #ffffff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 0 2px 0;
+    transition: background 0.3s ease;
+}
+
+.near-back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.near-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.1px;
+}
+
+.near-body {
+    flex: 1;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* Spaces cards matching rounded bboxes */
+.near-card {
+    background: #000000;
+    border-radius: 12px;
+    padding: 8px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    text-decoration: none;
+    min-height: 48px;
+}
+
+.near-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.near-card-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    text-align: left;
+}
+
+.near-card-name {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.near-card-area {
+    font-size: 7.5px;
+    font-weight: 600;
+    color: #8c8c8c;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+}
+
+.near-card-arrow {
+    color: #8c8c8c;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.near-card:hover .near-card-arrow {
+    color: #ffffff;
+    transform: translateX(2px);
+}

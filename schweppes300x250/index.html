@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schweppes Geolocation DCO - 300x250</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Entire banner is a premium clickable creative linking directly to Google Maps navigation -->
+    <div class="banner-container" id="banner-click">
+        <!-- Campaign Background Visual -->
+        <div class="slide-bg active" style="background-image: url('bg1.jpg');"></div>
+
+        <!-- Black Dynamic Bar (Dynamic Text Overlay) -->
+        <div class="text-container">
+            <div class="tagline">Grab a Schweppes in</div>
+            <div class="store-name-container">
+                <span class="store-name" id="store-name">YABA</span>
+            </div>
+        </div>
+
+        <!-- Centered Pulsing Radar Location Icon at the bottom -->
+        <div class="location-icon-container" id="radar-btn">
+            <div class="radar-circle-centered">
+                <div class="pulse-ring"></div>
+                <div class="radar-cross"></div>
+            </div>
+        </div>
+
+        <!-- Dynamic Closest Stores Overlay (Screenshot-Matched) -->
+        <div class="near-stores-overlay" id="near-overlay">
+            <div class="near-header">
+                <button class="near-back-btn" id="near-back-btn" title="Back">&larr;</button>
+                <span class="near-title">Grab a Schweppes Near You</span>
+            </div>
+            <div class="near-body" id="near-body">
+                <!-- Spaced black card bounding boxes populated dynamically in JS -->
+            </div>
+        </div>
+
+        <!-- Small loading indicator dot at the top left -->
+        <div class="gps-indicator" id="gps-indicator" title="Locating nearest store..."></div>
+
+        <!-- DT Logo at the top right -->
+        <img src="DTlogo.png" class="dt-logo" id="dt-logo-btn" alt="DT Logo">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
