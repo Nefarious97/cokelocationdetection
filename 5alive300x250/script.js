@@ -126,24 +126,24 @@ function autoDetectLocation() {
                     selectedStore = nearest;
                     AREA_NAME = nearest.area;
                     updateStoreUI(AREA_NAME);
-                    gpsIndicator.className = "gps-indicator success";
+                    if (gpsIndicator) gpsIndicator.className = "gps-indicator success";
                 }
             },
             (error) => {
                 console.warn("Auto-location failed/denied:", error);
-                gpsIndicator.className = "gps-indicator error";
+                if (gpsIndicator) gpsIndicator.className = "gps-indicator error";
             },
             { enableHighAccuracy: true, timeout: 6000, maximumAge: 60000 }
         );
     } else {
-        gpsIndicator.className = "gps-indicator error";
+        if (gpsIndicator) gpsIndicator.className = "gps-indicator error";
     }
 }
 
 // ── Open Page 2 (Closest 3 Stores Overlay) ──────────────────────────────────
 function openClosestStoresOverlay() {
     if (!currentUserCoords && "geolocation" in navigator) {
-        gpsIndicator.className = "gps-indicator";
+        if (gpsIndicator) gpsIndicator.className = "gps-indicator";
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const lat = position.coords.latitude;
@@ -155,12 +155,12 @@ function openClosestStoresOverlay() {
                     selectedStore = nearest;
                     AREA_NAME = nearest.area;
                     updateStoreUI(AREA_NAME);
-                    gpsIndicator.className = "gps-indicator success";
+                    if (gpsIndicator) gpsIndicator.className = "gps-indicator success";
                 }
                 buildAndShowOverlay(3);
             },
             (error) => {
-                gpsIndicator.className = "gps-indicator error";
+                if (gpsIndicator) gpsIndicator.className = "gps-indicator error";
                 buildAndShowOverlay(3);
             },
             { enableHighAccuracy: true, timeout: 5000, maximumAge: 60000 }
