@@ -4,6 +4,7 @@ let selectedStore = null;
 let directionsUrl = "";
 let currentUserCoords = null;
 let AREA_NAME = "YABA"; // Area name shown on page 1
+const FALLBACK_URL = "https://digitaltribe.ng/2026/coke/coke75/3dcarousel/320x480/index.html";
 
 // DOM Elements
 const bannerEl = document.getElementById("banner-click");
@@ -140,9 +141,19 @@ function autoDetectLocation() {
     }
 }
 
-// ── Open Page 2 (Closest 3 Stores Overlay) ──────────────────────────────────
+// ── Open Page 2 (Closest 3 Stores Overlay) OR Redirect if > 5km ─────────────
 function openClosestStoresOverlay() {
-    if (!currentUserCoords && "geolocation" in navigator) {
+    if (currentUserCoords) {
+        const nearest = findNearestStore(currentUserCoords.lat, currentUserCoords.lng);
+        if (nearest) {
+            const dist = calculateDistance(currentUserCoords.lat, currentUserCoords.lng, nearest.lat, nearest.lng);
+            if (dist > 5) {
+                window.open(FALLBACK_URL, "_blank");
+                return;
+            }
+        }
+        buildAndShowOverlay(3);
+    } else if ("geolocation" in navigator) {
         if (gpsIndicator) gpsIndicator.className = "gps-indicator";
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -156,6 +167,12 @@ function openClosestStoresOverlay() {
                     AREA_NAME = nearest.area;
                     updateStoreUI(AREA_NAME);
                     if (gpsIndicator) gpsIndicator.className = "gps-indicator success";
+
+                    const dist = calculateDistance(lat, lng, nearest.lat, nearest.lng);
+                    if (dist > 5) {
+                        window.open(FALLBACK_URL, "_blank");
+                        return;
+                    }
                 }
                 buildAndShowOverlay(3);
             },
